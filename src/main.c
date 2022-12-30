@@ -106,6 +106,37 @@ void render_color_buffer(void) {
     NULL
     );
 }
+
+void draw_grid(void) {
+    for (int y = 0; y < window_height; y += 10) {
+        for (int x = 0; x < window_width; x++) {
+            color_buffer[(window_width * y) + x] = 0xffff3333;
+        }
+    }
+    for (int y = 0; y < window_height; y ++) {
+        for (int x = 0; x < window_width; x += 10) {
+            color_buffer[(window_width * y) + x] = 0xffff3333;
+        }
+    }
+}
+
+// void draw_grid(void) {
+//     for (int y = 0; y < window_height; y ++) {
+//         for (int x = 0; x < window_width; x++) {
+//             if ( x % 10 == 0 || y % 10 ==0) {
+//                 color_buffer[(window_width * y) + x] = 0xff000000;
+//             }
+//         }
+//     }
+// }
+
+void draw_rect(int x, int y, int width, int height, uint32_t color) {
+    for (int i = x; i < (width + x); i++) {
+        for (int j = y; j < (height + y); j++) {
+            color_buffer[(window_width * j) + i] = color;
+        }
+    }
+}
 //iterating pixel in window
 void clear_color_buffer(uint32_t color) {
     for (int y = 0; y < window_height; y++) {
@@ -119,9 +150,12 @@ void render(void) {
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
     SDL_RenderClear(renderer);
 
+    draw_grid();
+    draw_rect(0, 500, 800, 580, 0xff00ff00);
+
     render_color_buffer();
     clear_color_buffer(0xff000000);
-
+    
     SDL_RenderPresent(renderer);
 }
 
