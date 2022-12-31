@@ -64,16 +64,24 @@ void render_color_buffer(void) {
 
 void draw_grid(void) {
     for (int y = 0; y < window_height; y += 10) {
-        for (int x = 0; x < window_width; x++) {
-            color_buffer[(window_width * y) + x] = 0xffff3333;
-        }
-    }
-    for (int y = 0; y < window_height; y ++) {
         for (int x = 0; x < window_width; x += 10) {
-            color_buffer[(window_width * y) + x] = 0xffff3333;
+            color_buffer[(window_width * y) + x] = 0xffffffff;
         }
     }
 }
+
+// void draw_grid(void) {
+//     for (int y = 0; y < window_height; y += 10) {
+//         for (int x = 0; x < window_width; x++) {
+//             color_buffer[(window_width * y) + x] = 0xffff3333;
+//         }
+//     }
+//     for (int y = 0; y < window_height; y ++) {
+//         for (int x = 0; x < window_width; x += 10) {
+//             color_buffer[(window_width * y) + x] = 0xffff3333;
+//         }
+//     }
+// }
 
 // void draw_grid(void) {
 //     for (int y = 0; y < window_height; y ++) {
