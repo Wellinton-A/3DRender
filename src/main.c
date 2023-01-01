@@ -43,7 +43,7 @@ void setup(void) {
 vec2_t project(vec3_t point) {
     vec2_t projected_point = {
         .x = (fov_factor * point.x),
-        .y = (fov_factor * point.y),
+        .y = (fov_factor * point.y)
     };
     return projected_point;
 }
@@ -77,7 +77,7 @@ void render(void) {
     // SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     // SDL_RenderClear(renderer);
 
-    draw_grid();
+    // draw_grid();
     // draw_rect(0, 500, 800, 580, 0xff00ff00);
 
     for (int i = 0; i < N_POINTS; i++) {
