@@ -87,7 +87,7 @@ void update(void) {
 }
 
 void render(void) {
-    // SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    // SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); 
     // SDL_RenderClear(renderer);
 
     // draw_grid();
@@ -99,8 +99,8 @@ void render(void) {
         draw_rect(
             projected_point.x + window_width / 2,
             projected_point.y + window_height / 2,
-            4,
-            4,
+            1,
+            1,
             0xFFFFFF00
             );   
     }
