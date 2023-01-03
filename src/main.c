@@ -1,3 +1,4 @@
+#include <SDL2/SDL_timer.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdbool.h>
@@ -17,6 +18,7 @@ vec3_t cube_rotation = {0,0,0};
 float fov_factor = 628;
 
 bool is_running = false;
+int previous_frame_time = 0;
 
 void setup(void) {
     //Allocate the required memory in bytes to hold the color buffer
@@ -67,9 +69,19 @@ void process_input(void) {
 }
 
 void update(void) {
-    cube_rotation.x += 0.006;
-    cube_rotation.y += 0.006;
-    cube_rotation.z += 0.006;
+    // while (!SDL_TICKS_PASSED(SDL_GetTicks(), previous_frame_time + FRAME_TARGET_TIME));
+
+    int time_to_wait = FRAME_TARGET_TIME - (SDL_GetTicks() - previous_frame_time);
+
+    if (time_to_wait > 0 && time_to_wait <= FRAME_TARGET_TIME) {
+        SDL_Delay(time_to_wait);
+    }
+
+    previous_frame_time = SDL_GetTicks();
+
+    cube_rotation.x += 0.01;
+    cube_rotation.y += 0.01;
+    cube_rotation.z += 0.01;
     for (int i = 0; i < N_POINTS; i++) {
         vec3_t point = cube_points[i];
 
@@ -99,8 +111,8 @@ void render(void) {
         draw_rect(
             projected_point.x + window_width / 2,
             projected_point.y + window_height / 2,
-            1,
-            1,
+            5,
+            5,
             0xFFFFFF00
             );   
     }
