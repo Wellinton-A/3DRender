@@ -6,11 +6,13 @@
 #include <stdlib.h>
 #include "display.h"
 #include "vector.h"
+#include "mesh.h"
+#include "triangle.h"
 
-#define N_POINTS (9 * 9 * 9)
-// const int N_POINTS = 9 * 9 * 9;
-vec3_t cube_points[N_POINTS];
-vec2_t projected_points[N_POINTS];
+// #define N_POINTS (9 * 9 * 9)
+// // const int N_POINTS = 9 * 9 * 9;
+// vec3_t cube_points[N_POINTS];
+// vec2_t projected_points[N_POINTS];
 
 vec3_t camera_position = { 0,0,-5};
 vec3_t cube_rotation = {0,0,0};
@@ -32,16 +34,16 @@ void setup(void) {
         window_height
         );
     
-    int point_count = 0;
-    //Statind loading array of vectors
-    for (float x = -1; x <= 1; x += 0.25) {
-        for (float y = -1; y <= 1; y += 0.25) {
-            for (float z = -1; z <= 1; z += 0.25) {
-                vec3_t new_point = {x, y, z};
-                cube_points[point_count++] = new_point;
-            }
-        }
-    }
+    // int point_count = 0;
+    // //Statind loading array of vectors
+    // for (float x = -1; x <= 1; x += 0.25) {
+    //     for (float y = -1; y <= 1; y += 0.25) {
+    //         for (float z = -1; z <= 1; z += 0.25) {
+    //             vec3_t new_point = {x, y, z};
+    //             cube_points[point_count++] = new_point;
+    //         }
+    //     }
+    // }
 }
 
 // function that receives a 3d vector and return a projected 2d point
@@ -82,20 +84,24 @@ void update(void) {
     cube_rotation.x += 0.01;
     cube_rotation.y += 0.01;
     cube_rotation.z += 0.01;
-    for (int i = 0; i < N_POINTS; i++) {
-        vec3_t point = cube_points[i];
 
-        vec3_t transformed_point = vec3_rotate_x(point, cube_rotation.x);
-        transformed_point = vec3_rotate_y(transformed_point, cube_rotation.y);
-        transformed_point = vec3_rotate_z(transformed_point, cube_rotation.z);
-
-        //Translate the points away from the camera
-        transformed_point.z -= camera_position.z;
-        //Project the current point
-        vec2_t projected_point = project(transformed_point);
-        //Save the projected 2d vector in the array of projected points
-        projected_points[i] = projected_point;
+    for (int i = 0; i < N_MESH_FACES; i++) {
+        face_t mesh_face = mesh_faces[i];
     }
+    // for (int i = 0; i < N_POINTS; i++) {
+    //     vec3_t point = cube_points[i];
+
+    //     vec3_t transformed_point = vec3_rotate_x(point, cube_rotation.x);
+    //     transformed_point = vec3_rotate_y(transformed_point, cube_rotation.y);
+    //     transformed_point = vec3_rotate_z(transformed_point, cube_rotation.z);
+
+    //     //Translate the points away from the camera
+    //     transformed_point.z -= camera_position.z;
+    //     //Project the current point
+    //     vec2_t projected_point = project(transformed_point);
+    //     //Save the projected 2d vector in the array of projected points
+    //     projected_points[i] = projected_point;
+    // }
 }
 
 void render(void) {
@@ -105,17 +111,17 @@ void render(void) {
     // draw_grid();
     // draw_rect(0, 500, 800, 580, 0xff00ff00);
 
-    for (int i = 0; i < N_POINTS; i++) {
-        vec2_t projected_point = projected_points[i];
+    // for (int i = 0; i < N_POINTS; i++) {
+    //     vec2_t projected_point = projected_points[i];
 
-        draw_rect(
-            projected_point.x + window_width / 2,
-            projected_point.y + window_height / 2,
-            5,
-            5,
-            0xFFFFFF00
-            );   
-    }
+    //     draw_rect(
+    //         projected_point.x + window_width / 2,
+    //         projected_point.y + window_height / 2,
+    //         5,
+    //         5,
+    //         0xFFFFFF00
+    //         );   
+    // }
 
     render_color_buffer();
     clear_color_buffer(0xff000000);
