@@ -1,5 +1,6 @@
 #include "display.h"
 #include <stdint.h>
+#include <stdlib.h>
 
 SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
@@ -105,6 +106,30 @@ void draw_rect(int x, int y, int width, int height, uint32_t color) {
         for (int j = y; j < (height + y); j++) {
             draw_pixel(i, j, color);
         }
+    }
+}
+
+void draw_line(int x0, int y0, int x1, int y1) {
+    int dx = x1 - x0;
+    int dy = y1 - y0;
+    int length_line;
+    if (abs(dx) >= abs(dy)) {
+        length_line = abs(dx);
+    } else {
+        length_line = abs(dy); 
+    }
+
+    float x_inc = dx / (float)length_line;
+    float y_inc = dy / (float)length_line;
+
+
+    float current_x = x0;
+    float current_y = y0;
+
+    for (int i = 0; i < length_line; i++) {
+        draw_pixel(round(current_x), round(current_y), 0xFFFFFF00);
+        current_x += x_inc;
+        current_y += y_inc;
     }
 }
 //iterating pixel in window

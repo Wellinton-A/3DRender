@@ -100,6 +100,8 @@ void update(void) {
         }
         //save the projected triangle in the array of triangle to render
         triangle_to_render[i] = projected_triangle;
+
+        
     }
 }
 
@@ -111,7 +113,13 @@ void render(void) {
         draw_rect(triangle.points[0].x, triangle.points[0].y, 3, 3, 0xFFFFFF00);
         draw_rect(triangle.points[1].x, triangle.points[1].y, 3, 3, 0xFFFFFF00);
         draw_rect(triangle.points[2].x, triangle.points[2].y, 3, 3, 0xFFFFFF00);
+
+        draw_line(triangle.points[0].x, triangle.points[0].y, triangle.points[1].x, triangle.points[1].y);
+        draw_line(triangle.points[1].x, triangle.points[1].y, triangle.points[2].x, triangle.points[2].y);
+        draw_line(triangle.points[2].x, triangle.points[2].y, triangle.points[0].x, triangle.points[0].y);
     }
+
+
 
     render_color_buffer();
     clear_color_buffer(0xff000000);
