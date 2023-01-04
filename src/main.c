@@ -57,8 +57,6 @@ void process_input(void) {
 }
 
 void update(void) {
-    // while (!SDL_TICKS_PASSED(SDL_GetTicks(), previous_frame_time + FRAME_TARGET_TIME));
-
     int time_to_wait = FRAME_TARGET_TIME - (SDL_GetTicks64() - previous_frame_time);
 
     if (time_to_wait > 0 && time_to_wait <= FRAME_TARGET_TIME) {
@@ -95,8 +93,8 @@ void update(void) {
             vec2_t projected_point = project(transformed_vertex);
 
             //Scale and center
-            projected_point.x += window_width / 2,
-            projected_point.y += window_height / 2,
+            projected_point.x += (float)window_width / 2,
+            projected_point.y += (float)window_height / 2,
 
             projected_triangle.points[j] = projected_point;
         }
@@ -106,11 +104,6 @@ void update(void) {
 }
 
 void render(void) {
-    // SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); 
-    // SDL_RenderClear(renderer);
-
-    // draw_grid();
-    // draw_rect(0, 500, 800, 580, 0xff00ff00);
 
     for (int i = 0; i < N_MESH_FACES; i++) {
         triangle_t triangle = triangle_to_render[i];
