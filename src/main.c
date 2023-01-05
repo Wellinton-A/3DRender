@@ -69,8 +69,8 @@ void update(void) {
     previous_frame_time = SDL_GetTicks64();
   
     mesh.rotation.x += 0.01;
-    mesh.rotation.y += 0.01;
-    mesh.rotation.z += 0.01;
+    mesh.rotation.y += 0.00;
+    mesh.rotation.z += 0.00;
 
     //Loop all triangle faces of our meshes
     int face_length = array_length(mesh.faces);
@@ -115,9 +115,9 @@ void render(void) {
     for (int i = 0; i < length_array; i++) {
         triangle_t triangle = triangle_to_render[i];
 
-        draw_rect(triangle.points[0].x, triangle.points[0].y, 3, 3, 0xFFFFFF00);
-        draw_rect(triangle.points[1].x, triangle.points[1].y, 3, 3, 0xFFFFFF00);
-        draw_rect(triangle.points[2].x, triangle.points[2].y, 3, 3, 0xFFFFFF00);
+        draw_rect(triangle.points[0].x, triangle.points[0].y, 1, 1, 0xFFFFFF00);
+        draw_rect(triangle.points[1].x, triangle.points[1].y, 1, 1, 0xFFFFFF00);
+        draw_rect(triangle.points[2].x, triangle.points[2].y, 1, 1, 0xFFFFFF00);
 
         // draw_line(triangle.points[0].x, triangle.points[0].y, triangle.points[1].x, triangle.points[1].y, 0xFF6F7282);
         // draw_line(triangle.points[1].x, triangle.points[1].y, triangle.points[2].x, triangle.points[2].y, 0xFF6F7282);

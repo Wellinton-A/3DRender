@@ -71,12 +71,13 @@ void load_obj_mesh_data(char* filename) {
 
         if (strncmp(line, "f ", 2) == 0) {
             face_t face;
-            face_t bin;
-            face_t bin2;
+            int texture_indices[3];
+            int normal_indices[3]; 
             sscanf(line, "f %d/%d/%d %d/%d/%d %d/%d/%d",
-                    &face.a, &bin.a, &bin2.a,
-                    &face.b, &bin.b, &bin2.b,
-                    &face.c, &bin.c, &bin2.c);
+                    &face.a, &texture_indices[0], &normal_indices[0],
+                    &face.b, &texture_indices[1], &normal_indices[1],
+                    &face.c, &texture_indices[2], &normal_indices[2]
+                );
             array_push(mesh.faces, face)
         }
     }
