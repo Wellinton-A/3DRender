@@ -8,8 +8,9 @@
 #include "vector.h"
 #include "mesh.h"
 #include "triangle.h"
+#include "array.h"
 
-triangle_t triangle_to_render[N_MESH_FACES];
+triangle_t* triangle_to_render =NULL;
 
 vec3_t camera_position = { 0,0,-5};
 vec3_t cube_rotation = {0,0,0};
@@ -63,6 +64,8 @@ void update(void) {
         SDL_Delay(time_to_wait);
     }
 
+    triangle_to_render = NULL;
+
     previous_frame_time = SDL_GetTicks64();
   
     cube_rotation.x += 0.01;
@@ -99,7 +102,7 @@ void update(void) {
             projected_triangle.points[j] = projected_point;
         }
         //save the projected triangle in the array of triangle to render
-        triangle_to_render[i] = projected_triangle;
+        array_push(triangle_to_render, projected_triangle)
 
         
     }
@@ -107,7 +110,8 @@ void update(void) {
 
 void render(void) {
 
-    for (int i = 0; i < N_MESH_FACES; i++) {
+    int length_array = array_length(triangle_to_render);
+    for (int i = 0; i < length_array; i++) {
         triangle_t triangle = triangle_to_render[i];
 
         draw_rect(triangle.points[0].x, triangle.points[0].y, 3, 3, 0xFFFFFF00);
