@@ -1,4 +1,5 @@
 #include "display.h"
+#include <SDL2/SDL_stdinc.h>
 #include <stdint.h>
 #include <stdlib.h>
 
@@ -72,28 +73,6 @@ void draw_grid(void) {
     }
 }
 
-// void draw_grid(void) {
-//     for (int y = 0; y < window_height; y += 10) {
-//         for (int x = 0; x < window_width; x++) {
-//             color_buffer[(window_width * y) + x] = 0xffff3333;
-//         }
-//     }
-//     for (int y = 0; y < window_height; y ++) {
-//         for (int x = 0; x < window_width; x += 10) {
-//             color_buffer[(window_width * y) + x] = 0xffff3333;
-//         }
-//     }
-// }
-
-// void draw_grid(void) {
-//     for (int y = 0; y < window_height; y ++) {
-//         for (int x = 0; x < window_width; x++) {
-//             if ( x % 10 == 0 || y % 10 ==0) {
-//                 color_buffer[(window_width * y) + x] = 0xff000000;
-//             }
-//         }
-//     }
-// }
 
 void draw_pixel(int x, int y, uint32_t color) {
     if (x >= 0 && x < window_width && y >= 0 && y < window_height) {
@@ -109,7 +88,13 @@ void draw_rect(int x, int y, int width, int height, uint32_t color) {
     }
 }
 
-void draw_line(int x0, int y0, int x1, int y1) {
+void draw_triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color) {
+    draw_line(x0, y0, x1, y1, color);
+    draw_line(x1, y1, x2, y2, color);
+    draw_line(x2, y2, x0, y0, color);
+}
+
+void draw_line(int x0, int y0, int x1, int y1, uint32_t color) {
     int dx = x1 - x0;
     int dy = y1 - y0;
     int length_line;
@@ -127,7 +112,7 @@ void draw_line(int x0, int y0, int x1, int y1) {
     float current_y = y0;
 
     for (int i = 0; i < length_line; i++) {
-        draw_pixel(round(current_x), round(current_y), 0xFFFFFF00);
+        draw_pixel(round(current_x), round(current_y), color);
         current_x += x_inc;
         current_y += y_inc;
     }
