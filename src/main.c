@@ -119,16 +119,16 @@ void render(void) {
         draw_rect(triangle.points[1].x, triangle.points[1].y, 1, 1, 0xFFFFFF00);
         draw_rect(triangle.points[2].x, triangle.points[2].y, 1, 1, 0xFFFFFF00);
 
-        // draw_line(triangle.points[0].x, triangle.points[0].y, triangle.points[1].x, triangle.points[1].y, 0xFF6F7282);
-        // draw_line(triangle.points[1].x, triangle.points[1].y, triangle.points[2].x, triangle.points[2].y, 0xFF6F7282);
-        // draw_line(triangle.points[2].x, triangle.points[2].y, triangle.points[0].x, triangle.points[0].y, 0xFF6F7282);
+        draw_line(triangle.points[0].x, triangle.points[0].y, triangle.points[1].x, triangle.points[1].y, 0xFF6F7282);
+        draw_line(triangle.points[1].x, triangle.points[1].y, triangle.points[2].x, triangle.points[2].y, 0xFF6F7282);
+        draw_line(triangle.points[2].x, triangle.points[2].y, triangle.points[0].x, triangle.points[0].y, 0xFF6F7282);
 
-        draw_triangle(
-            triangle.points[0].x, triangle.points[0].y,
-            triangle.points[1].x, triangle.points[1].y,
-            triangle.points[2].x, triangle.points[2].y,
-            0xFFFFFFFF   
-        );
+        // draw_triangle(
+        //     triangle.points[0].x, triangle.points[0].y,
+        //     triangle.points[1].x, triangle.points[1].y,
+        //     triangle.points[2].x, triangle.points[2].y,
+        //     0xFFFFFFFF   
+        // );
     }
 
     array_free(triangle_to_render);
